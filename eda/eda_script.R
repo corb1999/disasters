@@ -44,28 +44,30 @@ mem_used()
 
 # viz prep ---------------------------------------------------
 
-dt_filters <- fun_dater('2019-01-01', 
-                        '2020-01-01')
+dt_filters <- fun_dater(2015, 2021)
 
-major_filter <- c('foo', 'bar')
+# major_filter <- c('Tropical Cyclone')
+major_filter <- unique(dfa$disaster)
 
-(pltname <- 'hello ' %ps% 
-    'world; ' %ps% 
-    reduce(major_filter, paste, sep = '; ') %ps% '; ' %ps% 
+(pltname <- 'NOAA $1B+ Disasters; ' %ps% 
+    # reduce(major_filter, paste, sep = '; ') %ps% '; ' %ps% 
+    '10Bplus; ' %ps%
     dt_filters$date_text_str %ps% 
     '')
 
 dfplt <- dfa %>% 
-  filter(major %in% major_filter) %>% 
-  filter(date_var >= dt_filters$start_date, 
-         date_var <= dt_filters$end_date) %>% 
-  filter(foobar == 1)
+  filter(disaster %in% major_filter) %>% 
+  filter(cpi_adj_costs_mill >= 10000) %>% 
+  filter(begin_yr >= dt_filters$start_date, 
+         begin_yr <= dt_filters$end_date) 
 
 # ^ -----
 
 # run plots and visuals ------------------------------------
 
+fun_plt_tl1()
 
+fun_plt_tl2()
 
 
 # ^ -----

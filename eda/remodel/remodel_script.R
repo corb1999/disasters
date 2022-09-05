@@ -12,6 +12,7 @@ library(tidylog)
 library(lubridate)
 library(scales)
 library(gt)
+library(ggrepel)
 set.seed(metadatar$seed_set[1])
 options(digits = 4, max.print = 99, warnPartialMatchDollar = TRUE, 
         tibble.print_max = 30, scipen = 999, nwarnings = 5, 
@@ -91,6 +92,8 @@ dim(raw_df)
 # any last minute cleaning
 dfa <- raw_df
 
+asdf <- data_dictionary(dfa)
+
 # cleanup !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 rm(raw_df)
 ls()
@@ -100,9 +103,9 @@ mem_used()
 # date cleaning function for filtering in analysis -----------------
 
 fun_dater <- function(arg_sdt, arg_edt) {
-  x <- as.Date(arg_sdt)
-  y <- as.Date(arg_edt)
-  z <- paste0('Dates: ', x, ' to ', y, '; ')
+  x <- (arg_sdt)
+  y <- (arg_edt)
+  z <- paste0('Years: ', x, ' to ', y, '; ')
   return_me <- list(start_date = x, 
                     end_date = y, 
                     date_text_str = z)
